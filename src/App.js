@@ -28,6 +28,15 @@ function App() {
   // useEffect hook to make the API call when the component loads
   useEffect(() => {
     fetchData();
+    if(localStorage.getItem('groupingState')){
+      setGroupingState(localStorage.getItem('groupingState'));
+    }
+    else localStorage.setItem('groupingState',groupingState);
+    if(localStorage.getItem('orderingState')){
+      setOrderingState(localStorage.getItem('orderingState'));
+    }
+    else localStorage.setItem('orderingState',orderingState);
+
   }, []);  // Empty dependency array means this effect runs only once when the component mounts
 
   return (

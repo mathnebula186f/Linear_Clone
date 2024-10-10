@@ -25,9 +25,22 @@ function Header({groupingState,setGroupingState,orderingState,setOrderingState})
     setOrderingDropdownVisible(!isOrderingDropdownVisible);
     if(isGroupingDropdownVisible)setGroupingDropdownVisible(false);
   };
+
+  function changeGroupingState(value){
+    setGroupingState(value);
+    localStorage.setItem('groupingState',value);
+    toggleDropdown();
+  }
+  function changeOrderingState(value){
+    setOrderingState(value);
+    localStorage.setItem('orderingState',value);
+    toggleDropdown();
+  }
+
+
   return (
     <div style={{display:"flex",padding:"5px"}}>
-      <div onClick={toggleDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 5px",borderRadius:"5px",boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",transition: "box-shadow 0.3s", }}>
+      <div onClick={toggleDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 5px",borderRadius:"5px",boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",transition: "box-shadow 0.3s",cursor:"pointer"}}>
         <div style={{display:"flex",padding:"2px",justifyContent:"space-between",alignItems:"center"}}>
             <div style={{fontSize:"small"}}><FontAwesomeIcon icon={faAlignJustify}  /></div>
             <div style={{marginLeft:"3px",fontSize:"medium"}}>Display</div>
@@ -38,7 +51,7 @@ function Header({groupingState,setGroupingState,orderingState,setOrderingState})
         <div style={{position: "absolute",top: "100%",left:"10px",marginTop: "5px",backgroundColor: "#fff",padding: "10px",width: "25vw",boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",zIndex: 1000,display:"flex",flexDirection:"column",justifyContent:"space-between",borderRadius:"5px"}}>
           <div style={{ margin:"2px",display:"flex",justifyContent:"space-between",padding:"5px",alignItems:"center",  }}>
             <div style={{color:"grey "}}>Grouping</div>
-            <div onClick={toggleGroupingDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 2px",borderRadius:"5px"}}>
+            <div onClick={toggleGroupingDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 2px",borderRadius:"5px",cursor:"pointer"}}>
               <div style={{display:"flex",padding:"2px",justifyContent:"space-between",alignItems:"center"}}>
                   <div style={{margin:"0px 3px",fontSize:"medium"}}>{groupingState}</div>
               </div>
@@ -47,14 +60,14 @@ function Header({groupingState,setGroupingState,orderingState,setOrderingState})
           </div>
           {isGroupingDropdownVisible && (
             <div style={{position: "absolute",top: "100%",left:"0px",backgroundColor: "white",padding: "5px",marginTop: "5px",width:"100%",borderRadius:"5px",boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)"}}>
-              <div onClick={()=>{setGroupingState("Status");toggleDropdown()}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center"}}>Status</div>
-              <div onClick={()=>{setGroupingState("User");toggleDropdown()}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center"}}>User</div>
-              <div onClick={()=>{setGroupingState("Priority");toggleDropdown()}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center"}}>Priority</div>
+              <div onClick={()=>{changeGroupingState('Status')}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center",cursor:"pointer"}}>Status</div>
+              <div onClick={()=>{changeGroupingState('User')}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center",cursor:"pointer"}}>User</div>
+              <div onClick={()=>{changeGroupingState('Priority')}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center",cursor:"pointer"}}>Priority</div>
             </div>
           )}
           <div style={{ margin:"2px",display:"flex",justifyContent:"space-between",padding:"5px",alignItems:"center",  }}>
             <div style={{color:"grey "}}>Ordering</div>
-            <div onClick={toggleOrderingDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 2px",borderRadius:"5px"}}>
+            <div onClick={toggleOrderingDropdown} style={{height:"fit-content",width:"fit-content",border:"1px solid grey",display:"flex",justifyContent:"space-between",padding:"0px 2px",borderRadius:"5px",cursor:"pointer"}}>
               <div style={{display:"flex",padding:"2px",justifyContent:"space-between",alignItems:"center"}}>
                   <div style={{margin:"0px 3px",fontSize:"medium"}}>{orderingState}</div>
               </div>
@@ -63,8 +76,8 @@ function Header({groupingState,setGroupingState,orderingState,setOrderingState})
           </div>
           {isOrderingDropdownVisible && (
             <div style={{position: "absolute",top: "100%",left:"0px",backgroundColor: "white",padding: "5px",marginTop: "5px",width:"100%",borderRadius:"5px",boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)"}}>
-              <div onClick={()=>{setOrderingState("Priority");toggleDropdown()}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center"}}>Priority</div>
-              <div onClick={()=>{setOrderingState("Title");toggleDropdown()}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center"}}>Title</div>
+              <div onClick={()=>{changeOrderingState('Priority')}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center",cursor:"pointer"}}>Priority</div>
+              <div onClick={()=>{changeOrderingState('Title')}} style={{margin: "2px",display:"flex",alignItems:"center",width:"100%",justifyContent:"center",cursor:"pointer"}}>Title</div>
             </div>
           )}
           
